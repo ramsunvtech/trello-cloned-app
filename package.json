@@ -1,0 +1,35 @@
+{
+  "name": "trello-cloned-app",
+  "version": "1.0.0",
+  "description": "Trello Cloned App using HTML5, CSS3, Web Components.",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramsunvtech/trello-cloned-app.git"
+  },
+  "keywords": [
+    "trello",
+    "todo",
+    "webcomponent",
+    "board",
+    "vanilla"
+  ],
+  "author": "Venkatraman <ramsunvtech@gmail.com> (https://in.linkedin.com/in/venkatarchitect)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramsunvtech/trello-cloned-app/issues"
+  },
+  "homepage": "https://github.com/ramsunvtech/trello-cloned-app#readme",
+  "dependencies": {
+    "json-server": "^0.16.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
