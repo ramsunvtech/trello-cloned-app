@@ -1,18 +1,17 @@
 import BaseComponent from '../BaseComponent/BaseComponent.js';
 
 class Card extends BaseComponent {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    render() {
-        const title = this.getAttribute('title');
+  render() {
+    const title = this.getAttribute('title');
 
-        this.innerHTML = `
+    this.innerHTML = `
             <li>${title}</li>
         `;
-    }
   }
-  
-  export default Card;
-  
+}
+
+export default Card;

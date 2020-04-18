@@ -1,29 +1,31 @@
 {
-  "name": "trello-cloned-app",
+  "name": "trello-clone",
   "version": "1.0.0",
-  "description": "Trello Cloned App using HTML5, CSS3, Web Components.",
+  "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
   "scripts": {
     "start:dev": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "json:server":"json-server --watch board.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ramsunvtech/trello-cloned-app.git"
+    "url": "git+ssh://git@gitlab.com/ramsunvtech/trello-clone.git"
   },
   "keywords": [
-    "trello",
-    "todo",
-    "webcomponent",
-    "board",
-    "vanilla"
+    "Trello",
+    "web-components"
   ],
   "author": "Venkatraman <ramsunvtech@gmail.com> (https://in.linkedin.com/in/venkatarchitect)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ramsunvtech/trello-cloned-app/issues"
+    "url": "https://gitlab.com/ramsunvtech/trello-clone/issues"
   },
-  "homepage": "https://github.com/ramsunvtech/trello-cloned-app#readme",
+  "homepage": "https://gitlab.com/ramsunvtech/trello-clone#README",
   "dependencies": {
     "json-server": "^0.16.1"
   },

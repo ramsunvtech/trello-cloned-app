@@ -1,14 +1,14 @@
 import BaseComponent from '../BaseComponent/BaseComponent.js';
 
 class Header extends BaseComponent {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    render() {
-        const title = this.getAttribute('title');
+  render() {
+    const title = this.getAttribute('title');
 
-        this.innerHTML = `
+    this.innerHTML = `
             <header class="masthead">
                 <div class="boards-menu">
                     <div class="board-search">
@@ -22,8 +22,7 @@ class Header extends BaseComponent {
                 </div>
             </header>
         `;
-    }
   }
-  
-  export default Header;
-  
+}
+
+export default Header;

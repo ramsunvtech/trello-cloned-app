@@ -1,0 +1,61 @@
+{
+  "boards": {
+    "id": "1",
+    "name": "Simple Board",
+    "description": "A board with simple details"
+  },
+  "columns": [
+    {
+      "id": "1",
+      "title": "Column-1",
+      "boardId": "1"
+    },
+    {
+      "id": "2",
+      "title": "Column-2",
+      "boardId": "1"
+    },
+    {
+      "id": "3",
+      "title": "Column-3",
+      "boardId": "1"
+    },
+    {
+      "id": "4",
+      "title": "Column-4",
+      "boardId": "1"
+    }
+  ],
+  "cards": [
+    {
+      "id": "1",
+      "title": "Card-1",
+      "description": "",
+      "columnId": "1"
+    },
+    {
+      "id": "2",
+      "title": "Card-2",
+      "description": "",
+      "columnId": "2"
+    },
+    {
+      "id": "3",
+      "title": "Card-3",
+      "description": "",
+      "columnId": "1"
+    },
+    {
+      "id": "4",
+      "title": "Card-4",
+      "description": "",
+      "columnId": "1"
+    },
+    {
+      "id": "5",
+      "title": "Card-5",
+      "description": "Card desc 5",
+      "columnId": "4"
+    }
+  ]
+}
