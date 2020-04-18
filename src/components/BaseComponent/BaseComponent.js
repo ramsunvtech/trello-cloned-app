@@ -1,9 +1,12 @@
+import { apiEndpoint } from '../../config.js';
+
 class BaseComponent extends HTMLElement {
   constructor(state = {}) {
     super();
 
     this.state = {
       ...state,
+      apiEndpoint,
     };
 
     this.render();

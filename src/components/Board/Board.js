@@ -1,47 +1,44 @@
 import BaseComponent from '../BaseComponent/BaseComponent.js';
 
-const columnList = [
-  {
-    "id": "1",
-    "title": "To do",
-    "boardId": "1"
-  },
-  {
-    "id": "2",
-    "title": "Doing",
-    "boardId": "1"
-  },
-  {
-    "id": "3",
-    "title": "Done",
-    "boardId": "1"
-  }
-];
-
 class Board extends BaseComponent {
   constructor() {
-    super();
+    super({
+      columnList: [],
+    });
+
+    this.getColumnList();
   }
 
   getColumnList() {
-    //@todo: Column List API Goes here.
-    const columns = columnList.map(column => {
-      const {
-        id,
-        title,
-      } = column;
-      return `
-                <app-column id="${id}" title="${title}"></app-column>
-            `;
-    });
+    const {
+      apiEndpoint,
+    } = this.state;
 
-    return columns.join('\n');
+    fetch(`${apiEndpoint}/columns`)
+      .then((response) => {
+        return response.json();
+      }).then((data) => {
+        const columnList = data.map(column => {
+          const {
+            id,
+            title,
+          } = column;
+          return `
+                        <app-column id="${id}" title="${title}"></app-column>
+                    `;
+        });
+        this.setState({ columnList });
+      });
   }
 
   render() {
+    const {
+      columnList,
+    } = this.state;
+
     this.innerHTML = `
             <section class="lists-container">
-                ${this.getColumnList()}
+                ${columnList.join('\n')}
                 <button class="add-list-btn btn">Add a list</button>
             </section>
         `;
