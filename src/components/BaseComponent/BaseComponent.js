@@ -1,5 +1,5 @@
 class BaseComponent extends HTMLElement {
-    constructor(state) {
+    constructor(state = {}) {
         super();
   
         this.state = {

@@ -1,6 +1,6 @@
 import BaseComponent from './components/BaseComponent/BaseComponent.js';
 
-class TrelloApp extends BaseComponent {
+class TrelloGameApp extends BaseComponent {
     constructor() {
         super({
             status: 'initial',
@@ -28,12 +28,11 @@ class TrelloApp extends BaseComponent {
         } = this.state;
 
         this.innerHTML = `
-            <h1>${app} App here</h1>
-            <button id="submit">Click</button>
-            Status: ${status}
+            <app-header title="Trello Clone App"></app-header>
+            <app-board></app-board>
         `;
     }
   }
   
-  export default TrelloApp;
+  export default TrelloGameApp;
   
