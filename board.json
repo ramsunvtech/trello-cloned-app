@@ -7,55 +7,50 @@
   "columns": [
     {
       "id": "1",
-      "title": "Column-1",
+      "title": "Things To Do",
       "boardId": "1"
     },
     {
       "id": "2",
-      "title": "Column-2",
+      "title": "Doing",
       "boardId": "1"
     },
     {
       "id": "3",
-      "title": "Column-3",
-      "boardId": "1"
-    },
-    {
-      "id": "4",
-      "title": "Column-4",
+      "title": "Done",
       "boardId": "1"
     }
   ],
   "cards": [
     {
       "id": "1",
-      "title": "Card-1",
+      "title": "Lunch",
       "description": "",
       "columnId": "1"
     },
     {
       "id": "2",
-      "title": "Card-2",
+      "title": "Coffee",
       "description": "",
       "columnId": "2"
     },
     {
       "id": "3",
-      "title": "Card-3",
+      "title": "Dinner",
       "description": "",
       "columnId": "1"
     },
     {
       "id": "4",
-      "title": "Card-4",
+      "title": "Break Fast",
       "description": "",
-      "columnId": "1"
+      "columnId": "3"
     },
     {
       "id": "5",
-      "title": "Card-5",
+      "title": "Jogging",
       "description": "Card desc 5",
-      "columnId": "4"
+      "columnId": "3"
     }
   ]
 }

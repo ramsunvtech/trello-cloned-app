@@ -5,16 +5,16 @@ body, header, h1 {
 
 body {
     background-color: #0079bf;
+    background-image: url('../images/blue-mountains.jpg');
+    background-position: center;
 }
 
-header {
-    background-color: #004f7c;
-    color: #7fb3d1;
-    padding:10px 0;
-    text-align: center;
+app-header {
+  padding: 7px 5px;
+  margin-bottom: 7px;
 }
 
-header h1 {
+app-header h1 {
     font-size: 18px;
     font-weight: bold;
     font-family: "arial, sans-serif";
@@ -55,22 +55,21 @@ body {
 
 /* Masthead */
 
-.masthead {
+app-header {
     flex-basis: 4rem;
     display: flex;
     align-items: center;
-    padding: 0 0.8rem;
     background-color: #0067a3;
     box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
 }
 
-.masthead .btn {
+app-header .btn {
     background-color: #4c94be;
     border-radius: 0.3rem;
     transition: background-color 150ms;
 }
 
-.masthead .btn:hover {
+app-header .btn:hover {
     background-color: #3385b5;
 }
 
@@ -274,13 +273,7 @@ body {
     content: '...';
 }
 
-/*
-
-The following rule will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
-
-*/
+/* Grid Box Styling */
 
 @supports (display: grid) {
     body {
@@ -289,7 +282,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
         grid-row-gap: 0.8rem;
     }
 
-    .masthead {
+    app-header {
         display: grid;
         grid-template-columns: auto 1fr auto;
         grid-column-gap: 2rem;
@@ -338,5 +331,31 @@ Remove or comment-out the code block below to see how the browser will fall-back
     .board-controls .btn,
     .user-settings-btn {
         margin: 0;
+    }
+
+    .card {
+      display: flex;
+    }
+    
+    .card .item {
+      flex-direction: column;
+    }
+
+    .card .name {
+      width: 95%;
+    }
+
+    .card .action {
+      width: 15%;
+    }
+
+    .card .action .edit {
+      color: blue;
+      text-decoration: none;
+    }
+
+    .card .action .delete {
+      color: red;
+      text-decoration: none;
     }
 }

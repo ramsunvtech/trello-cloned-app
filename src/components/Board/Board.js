@@ -9,26 +9,35 @@ class Board extends BaseComponent {
     this.getColumnList();
   }
 
-  getColumnList() {
+  connectedCallback() {
+    // this.$columnCreator = this.querySelector('column-creator');
+    // this.$columnCreator.addEventListener('columnCreation', this.addColumn.bind(this));
+  }
+
+  disconnectedCallback() { }
+
+  addColumn(e) {
+    const { title } = e.detail;
+  }
+
+
+
+  async getColumnList() {
     const {
       apiEndpoint,
     } = this.state;
 
-    fetch(`${apiEndpoint}/columns`)
-      .then((response) => {
-        return response.json();
-      }).then((data) => {
-        const columnList = data.map(column => {
-          const {
-            id,
-            title,
-          } = column;
-          return `
-                        <app-column id="${id}" title="${title}"></app-column>
-                    `;
-        });
-        this.setState({ columnList });
-      });
+    const data = await fetch(`${apiEndpoint}/columns`);
+    const response = await data.json();
+
+    const columnList = response.map(column => {
+      const {
+        id,
+        title,
+      } = column;
+      return `<app-column id="${id}" title="${title}" ></app-column>`;
+    });
+    this.setState({ columnList });
   }
 
   render() {
@@ -38,8 +47,8 @@ class Board extends BaseComponent {
 
     this.innerHTML = `
             <section class="lists-container">
-                ${columnList.join('\n')}
-                <button class="add-list-btn btn">Add a list</button>
+                ${columnList.join('\n')} 
+                <add-column-form></add-column-form>
             </section>
         `;
   }

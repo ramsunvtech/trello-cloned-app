@@ -6,11 +6,17 @@ class Card extends BaseComponent {
   }
 
   render() {
-    const title = this.getAttribute('title');
+    const name = this.getAttribute('name');
 
     this.innerHTML = `
-            <li>${title}</li>
-        `;
+      <div class="card">
+        <span class="item name">${name}</span>
+        <span class="item action">
+          <a href="#" class="edit">E</a> | 
+          <a href="#" class="delete">X</a>
+        </span>
+      </div>
+    `;
   }
 }
 
