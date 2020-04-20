@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start:dev": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "json:server": "json-server --watch board.json"
+    "json:server": "json-server --watch board.json",
+    "test": "jest --env=jest-environment-jsdom-sixteen --coverage"
   },
   "repository": {
     "type": "git",
@@ -26,10 +26,10 @@
     "url": "https://gitlab.com/ramsunvtech/trello-clone/issues"
   },
   "homepage": "https://gitlab.com/ramsunvtech/trello-clone#README",
-  "dependencies": {
-    "json-server": "^0.16.1"
-  },
   "devDependencies": {
+    "json-server": "^0.16.1",
+    "jest": "^25.3.0",
+    "jest-dom": "^4.0.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
