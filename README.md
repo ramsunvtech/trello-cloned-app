@@ -1,7 +1,7 @@
 # trello-clone
 
 <p align="center">
-    <img height="700" width="800" src="https://github.com/ramsunvtech/trello-clone/raw/master/trello-app.png">
+    <img height="700" width="800" src="https://raw.githubusercontent.com/ramsunvtech/trello-cloned-app/master/trello-app.png">
 </p>
 
 ## API documentation
