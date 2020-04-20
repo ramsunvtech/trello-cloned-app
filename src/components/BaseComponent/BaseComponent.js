@@ -9,23 +9,41 @@ class BaseComponent extends HTMLElement {
       apiEndpoint,
     };
 
-    this.render();
+    this.$app = document.querySelector('trello-app');
+  }
+
+  async renderCycle() {
+    await this.preRender();
+    await this.render();
+    await this.postRender();
+  }
+
+  async connectedCallback() {
+    await this.renderCycle();
   }
 
   setState(state, canReRender = true) {
-    this.state = {
-      ...this.state,
-      ...state,
-    };
-
-    if (canReRender) {
-      this.render();
-    }
+    return new Promise(resolve => {
+      this.state = {
+        ...this.state,
+        ...state,
+      };
+  
+      if (canReRender) {
+        this.render();
+        this.onUpdate();
+      }
+      resolve();
+    })
   }
 
-  render() {
-    this.innerHTML = '';
-  }
+  preRender() {}
+
+  render() {}
+
+  postRender() {}
+
+  onUpdate() {}
 }
 
 export default BaseComponent;

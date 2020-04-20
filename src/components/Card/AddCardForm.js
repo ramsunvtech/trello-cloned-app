@@ -4,11 +4,11 @@ const templateCardCreator = document.createElement('template');
 templateCardCreator.innerHTML = `
   <div class="card-composer">
     <form id="new-card-form" class="card-creator">
-      <div class="card" style="padding: 6px 8px; margin: 0;">
+      <div class="add-card" style="padding: 6px 8px; margin: 0;">
         <div>
           <textarea class="textarea-input" placeholder="Enter a Title for this card" style="height:34px;"></textarea>
         </div>
-        <button class="add-button primary" type="submit">Add card</button>
+        <button class="add-button primary" type="submit">Add card</button>&nbsp;<a href="#" class="cancel">Cancel</a>
       </div>
     </form>
   </div>
@@ -16,30 +16,68 @@ templateCardCreator.innerHTML = `
 
 class AddCardForm extends BaseComponent {
   constructor() {
-    super();
+    super({
+      canToggle: true,
+    });
   }
 
-  connectedCallback() {
-    this.appendChild(templateCardCreator.content.cloneNode(true));
+  listenToAddLink() {
+    this.$addButton = this.querySelector('.add-card-btn');
+  
+    if (this.$addButton) {
+      this.$addButton.addEventListener('click', (e) => this.setState({ canToggle: false }));
+    }
+  }
+
+  postRender() {
+    this.listenToAddLink();
+  }
+
+  onUpdate() {
+    // this.appendChild(templateCardCreator.content.cloneNode(true));
     this.$form = this.querySelector('form');
     this.$titleInput = this.querySelector('.textarea-input');
 
-    this.$form.addEventListener('submit', e => {
-      e.preventDefault();
-      document.dispatchEvent(
-        new CustomEvent('cardCreation', {
-          detail: { description: this.$titleInput.value },
-        })
-      );
-    });
+    this.listenToAddLink();
+    
+    this.$cancelButton = this.querySelector('.cancel-btn');
+    if (this.$cancelButton) {
+      this.$cancelButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.setState({ canToggle: true });
+      });
+    }
+
+    if (this.$form) {
+      this.$form.addEventListener('submit', e => {
+        e.preventDefault();
+        document.dispatchEvent(
+          new CustomEvent('cardCreation', {
+            detail: { description: this.$titleInput.value },
+          })
+        );
+      });
+    }    
   }
 
   disconnectedCallback() { }
 
   render() {
-    // this.innerHTML = `
-    //   <button class="add-card-btn btn">+ Add another card</button>
-    // `;
+    const {
+      canToggle
+    } = this.state;
+
+    this.innerHTML = `
+      ${canToggle ? `<button class="add-card-btn btn">+ Add another card</button>` : ''}
+      ${!canToggle ? `<div class="card-composer">
+        <form id="new-card-form" class="card-creator">
+          <div class="add-card">
+            <textarea class="textarea-input" placeholder="Enter a Title for this card"></textarea>
+            <button class="add-button primary" type="submit">Add card</button>&nbsp;<a href="#" class="cancel-btn">Cancel</a>
+          </div>
+        </form>
+      </div>` : ''}
+    `;
   }
 }
 

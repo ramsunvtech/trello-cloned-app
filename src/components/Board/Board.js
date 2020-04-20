@@ -9,7 +9,7 @@ class Board extends BaseComponent {
     this.getColumnList();
   }
 
-  connectedCallback() {
+  postRender() {
     this.$columnCreator = this.querySelector('add-column-form');
     this.$columnCreator.addEventListener('columnCreation', this.addColumn.bind(this));
   }

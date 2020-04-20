@@ -6,7 +6,7 @@ class Column extends BaseComponent {
     super();
   }
 
-  connectedCallback() {
+  postRender() {
     this.getCard();
     document.addEventListener('cardCreation', this.addCard.bind(this));
   }
@@ -41,11 +41,14 @@ class Column extends BaseComponent {
       const {
         id,
         title,
+        columnId,
       } = card;
       return `
         <li>
           <app-card
+            id="${id}"
             name="${title}"
+            column="${columnId}"
           ></app-cards>
         </li>
       `;
@@ -60,12 +63,13 @@ class Column extends BaseComponent {
 
   render() {
     const title = this.getAttribute('title');
+    const id = this.getAttribute('id');
 
     this.innerHTML = `
       <div class="list" ondrop="drop(event)" ondragover="allowDrop(event)">
         <h3 class="list-title">${title}</h3> 
         ${this.getCardList()}
-        <add-card-form></add-card-form>
+        <add-card-form column-id="${id}"></add-card-form>
       <div>
     `;
   }

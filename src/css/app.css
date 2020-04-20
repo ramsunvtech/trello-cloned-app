@@ -236,6 +236,11 @@ app-header .btn:hover {
     background-color: #eee;
 }
 
+.add-card {
+  padding: 6px 8px;
+  margin: 0;
+}
+
 .add-card-btn {
     display: block;
     font-size: 1.4rem;
@@ -343,8 +348,12 @@ app-header .btn:hover {
       flex-direction: column;
     }
 
-    .card .name {
+    .card .name, .card .edit-card-input {
       width: 95%;
+    }
+
+    .card .name:focus {
+      border:0 none;
     }
 
     .card .action {
@@ -367,8 +376,9 @@ app-header .btn:hover {
       height: 40px;
       background: #fff;
       border: none;
+      padding: 5px;
       box-shadow: none;
-      margin-bottom: 4px;
+      margin-bottom: 10px;
       max-height: 162px;
       min-height: 54px;
       overflow-y: auto;
