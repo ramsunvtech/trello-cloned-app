@@ -10,8 +10,8 @@ class Board extends BaseComponent {
   }
 
   connectedCallback() {
-    // this.$columnCreator = this.querySelector('column-creator');
-    // this.$columnCreator.addEventListener('columnCreation', this.addColumn.bind(this));
+    this.$columnCreator = this.querySelector('add-column-form');
+    this.$columnCreator.addEventListener('columnCreation', this.addColumn.bind(this));
   }
 
   disconnectedCallback() { }
@@ -19,8 +19,6 @@ class Board extends BaseComponent {
   addColumn(e) {
     const { title } = e.detail;
   }
-
-
 
   async getColumnList() {
     const {
@@ -46,11 +44,11 @@ class Board extends BaseComponent {
     } = this.state;
 
     this.innerHTML = `
-            <section class="lists-container">
-                ${columnList.join('\n')} 
-                <add-column-form></add-column-form>
-            </section>
-        `;
+      <section class="lists-container">
+          ${columnList.join('\n')} 
+          <add-column-form></add-column-form>
+      </section>
+    `;
   }
 }
 

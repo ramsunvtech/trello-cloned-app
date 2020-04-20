@@ -8,16 +8,20 @@ class Column extends BaseComponent {
 
   connectedCallback() {
     this.getCard();
-    this.$cardCreator = this.querySelector('card-creator');
-    // this.$cardCreator.addEventListener('cardCreation', this.addCard.bind(this));
+    document.addEventListener('cardCreation', this.addCard.bind(this));
   }
 
   addCard(e) {
+    const id = this.getAttribute('id');
+    const { cardList } = this.state;
+
     const card = [...cardList, {
-      "id": ID(),
+      "id": getUniqueId(),
       "title": e.detail.description,
-      "description": e.detail.description
-    }]
+      "description": e.detail.description,
+      "columnId": id,
+    }];
+
     this.setState({ cardList: card });
   }
 
@@ -31,19 +35,16 @@ class Column extends BaseComponent {
   getCardList() {
     const id = this.getAttribute('id');
     const { cardList = [] } = this.state;
-    //@todo: Card List API Goes here. 
+
     const data = cardList.filter(data => data.columnId === id);
     const cards = (data || []).map(card => {
       const {
-
         id,
         title,
       } = card;
       return `
         <li>
           <app-card
-            draggable="true" id=${getUniqueId()}
-            ondragstart="drag(event)"
             name="${title}"
           ></app-cards>
         </li>

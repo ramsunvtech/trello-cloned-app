@@ -1,18 +1,18 @@
 import BaseComponent from '../BaseComponent/BaseComponent.js';
 
-// const templateCardCreator = document.createElement('template');
-// templateCardCreator.innerHTML = `
-//   <div class="card-composer">
-//     <form id="new-card-form" class="card-creator">
-//       <div class="card" style="padding: 6px 8px; margin: 0;">
-//         <div>
-//           <textarea class="card-creator-description-input" placeholder="Enter a description for this card..." style="height:34px;"></textarea>
-//         </div>
-//         <button class="add-card-btn primary" type="submit">Add card</button>
-//       </div>
-//     </form>
-//   </div>
-// `;
+const templateCardCreator = document.createElement('template');
+templateCardCreator.innerHTML = `
+  <div class="card-composer">
+    <form id="new-card-form" class="card-creator">
+      <div class="card" style="padding: 6px 8px; margin: 0;">
+        <div>
+          <textarea class="textarea-input" placeholder="Enter a Title for this card" style="height:34px;"></textarea>
+        </div>
+        <button class="add-button primary" type="submit">Add card</button>
+      </div>
+    </form>
+  </div>
+`;
 
 class AddCardForm extends BaseComponent {
   constructor() {
@@ -20,26 +20,26 @@ class AddCardForm extends BaseComponent {
   }
 
   connectedCallback() {
-    // this.appendChild(templateCardCreator.content.cloneNode(true));
-    // this.$form = this.querySelector('form');
-    // this.$descriptionInput = this.querySelector('.card-creator-description-input');
+    this.appendChild(templateCardCreator.content.cloneNode(true));
+    this.$form = this.querySelector('form');
+    this.$titleInput = this.querySelector('.textarea-input');
 
-    // this.$form.addEventListener('submit', e => {
-    //   e.preventDefault();
-    //   this.dispatchEvent(
-    //     new CustomEvent('cardCreation', {
-    //       detail: { description: this.$descriptionInput.value },
-    //     })
-    //   );
-    // });
+    this.$form.addEventListener('submit', e => {
+      e.preventDefault();
+      document.dispatchEvent(
+        new CustomEvent('cardCreation', {
+          detail: { description: this.$titleInput.value },
+        })
+      );
+    });
   }
 
   disconnectedCallback() { }
 
   render() {
-    this.innerHTML = `
-      <button class="add-card-btn btn">+ Add another card</button>
-    `;
+    // this.innerHTML = `
+    //   <button class="add-card-btn btn">+ Add another card</button>
+    // `;
   }
 }
 

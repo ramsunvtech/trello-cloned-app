@@ -7,9 +7,10 @@ class Card extends BaseComponent {
 
   render() {
     const name = this.getAttribute('name');
+    const id = this.getAttribute('id');
 
     this.innerHTML = `
-      <div class="card">
+      <div class="card" draggable="true" id="${id}" ondragstart="">
         <span class="item name">${name}</span>
         <span class="item action">
           <a href="#" class="edit">E</a> | 
