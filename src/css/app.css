@@ -97,7 +97,7 @@ app-header .btn:hover {
     position: relative;
 }
 
-.board-search-input {
+.board-search-input, .add-column-input {
     height: 3rem;
     border: none;
     border-radius: 0.3rem;
@@ -105,9 +105,11 @@ app-header .btn:hover {
     width: 100%;
     padding: 0 3rem 0 1rem;
     color: #fff;
+    margin-bottom: 5px;
 }
 
-.board-search-input::-webkit-input-placeholder { /* Edge */
+.board-search-input::-webkit-input-placeholder,
+.add-column-input::-webkit-input-placeholder { /* Edge */
     color: #fff;
 }
 
@@ -357,5 +359,44 @@ app-header .btn:hover {
     .card .action .delete {
       color: red;
       text-decoration: none;
+    }
+
+    .textarea-input {
+      overflow: hidden;
+      overflow-wrap: break-word;
+      height: 40px;
+      background: #fff;
+      border: none;
+      box-shadow: none;
+      margin-bottom: 4px;
+      max-height: 162px;
+      min-height: 54px;
+      overflow-y: auto;
+      resize: vertical;
+      width: 100%;
+      color: #172b4d;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      border-radius: 3px;
+      display: block;
+      line-height: 20px;
+      transition-property: background-color,border-color,box-shadow;
+      transition-duration: 85ms;
+      transition-timing-function: ease;
+    }
+
+    .add-button {
+      background-color: #49852e;
+      box-shadow: none;
+      border: none;
+      color: #fff;
+      padding: 6px 12px;  
+      text-align: center;
+      transition-property: background-color,border-color,box-shadow;
+      transition-duration: 85ms;
+      transition-timing-function: ease;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      border-radius: 3px;
     }
 }
