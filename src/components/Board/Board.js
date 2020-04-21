@@ -1,4 +1,5 @@
 import BaseComponent from '../BaseComponent/BaseComponent.js';
+import { getUniqueId } from '../../Utiltities.js';
 
 class Board extends BaseComponent {
   constructor() {
@@ -9,15 +10,42 @@ class Board extends BaseComponent {
     this.getColumnList();
   }
 
-  postRender() {
-    this.$columnCreator = this.querySelector('add-column-form');
-    this.$columnCreator.addEventListener('columnCreation', this.addColumn.bind(this));
+  onMount() {
+    this.$app.addEventListener('columnCreation', this.addColumn.bind(this));
   }
 
   disconnectedCallback() { }
 
-  addColumn(e) {
+  async addColumn(e) {
     const { title } = e.detail;
+    const {
+      apiEndpoint,
+      columnList,
+    } = this.state;
+
+    const newColumnItem = {
+      "id": getUniqueId(),
+      "title": title,
+      "boardId": "1",
+    };
+    
+    const newColumn = await fetch(`${apiEndpoint}/columns`, {
+      method: 'POST',
+      body: JSON.stringify(newColumnItem),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const newColumnResponse = await newColumn.json();
+
+    if (!newColumnResponse.id) {
+      return;
+    }
+
+    const columns = [...columnList, newColumnItem];
+    console.log('columns: ', columns);
+
+    this.setState({ columnList: columns });
   }
 
   async getColumnList() {
@@ -25,16 +53,9 @@ class Board extends BaseComponent {
       apiEndpoint,
     } = this.state;
 
-    const data = await fetch(`${apiEndpoint}/columns`);
-    const response = await data.json();
+    const columnListApi = await fetch(`${apiEndpoint}/columns`);
+    const columnList = await columnListApi.json();
 
-    const columnList = response.map(column => {
-      const {
-        id,
-        title,
-      } = column;
-      return `<app-column id="${id}" title="${title}" ></app-column>`;
-    });
     this.setState({ columnList });
   }
 
@@ -45,8 +66,14 @@ class Board extends BaseComponent {
 
     this.innerHTML = `
       <section class="lists-container">
-          ${columnList.join('\n')} 
-          <add-column-form></add-column-form>
+        ${columnList.map(column => {
+          const {
+            id,
+            title,
+          } = column;
+          return `<app-column id="${id}" title="${title}" ></app-column>`;
+        }).join('\n')}
+        <add-column-form></add-column-form>
       </section>
     `;
   }

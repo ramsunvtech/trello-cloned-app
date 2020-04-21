@@ -33,7 +33,12 @@ class Card extends BaseComponent {
       apiEndpoint,
     } = this.state;
 
-    const deleteCard = await fetch(`${apiEndpoint}/cards/${id}`, { method: 'DELETE' });
+    const deleteCard = await fetch(`${apiEndpoint}/cards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     const deleteCardResponse = await deleteCard.json();
   }
 
@@ -47,7 +52,7 @@ class Card extends BaseComponent {
     });
   }
 
-  postRender() {
+  onMount() {
     this.$deleteLink = this.querySelector('a.delete');
     this.$deleteLink.addEventListener('click', e => this.delete(e));
 

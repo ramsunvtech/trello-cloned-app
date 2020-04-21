@@ -29,7 +29,7 @@ class AddCardForm extends BaseComponent {
     }
   }
 
-  postRender() {
+  onMount() {
     this.listenToAddLink();
   }
 
@@ -50,10 +50,15 @@ class AddCardForm extends BaseComponent {
 
     if (this.$form) {
       this.$form.addEventListener('submit', e => {
+        const columnId = this.getAttribute('column-id');
         e.preventDefault();
-        document.dispatchEvent(
+
+        this.$app.dispatchEvent(
           new CustomEvent('cardCreation', {
-            detail: { description: this.$titleInput.value },
+            detail: {
+              columnId,
+              value: this.$titleInput.value,
+            },
           })
         );
       });

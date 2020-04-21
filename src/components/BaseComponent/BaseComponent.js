@@ -13,9 +13,8 @@ class BaseComponent extends HTMLElement {
   }
 
   async renderCycle() {
-    await this.preRender();
     await this.render();
-    await this.postRender();
+    await this.onMount();
   }
 
   async connectedCallback() {
@@ -41,7 +40,7 @@ class BaseComponent extends HTMLElement {
 
   render() {}
 
-  postRender() {}
+  onMount() {}
 
   onUpdate() {}
 }

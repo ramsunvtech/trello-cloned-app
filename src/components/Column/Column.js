@@ -6,21 +6,46 @@ class Column extends BaseComponent {
     super();
   }
 
-  postRender() {
+  onMount() {
     this.getCard();
-    document.addEventListener('cardCreation', this.addCard.bind(this));
+    this.$app.addEventListener('cardCreation', e => this.addCard(e));
   }
 
-  addCard(e) {
+  async addCard(e) {
     const id = this.getAttribute('id');
-    const { cardList } = this.state;
+    const {
+      columnId,
+      value,
+    } = e.detail;
 
-    const card = [...cardList, {
+    if (columnId !== id) {
+      return;
+    }
+
+    const {
+      apiEndpoint,
+      cardList
+    } = this.state;
+
+    const newCardItem = {
       "id": getUniqueId(),
-      "title": e.detail.description,
-      "description": e.detail.description,
+      "title": value,
+      "description": value,
       "columnId": id,
-    }];
+    };
+    const newCard = await fetch(`${apiEndpoint}/cards`, {
+      method: 'POST',
+      body: JSON.stringify(newCardItem),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const newCardResponse = await newCard.json();
+
+    if (!newCardResponse.id) {
+      return;
+    }
+    const card = [...cardList, newCardItem];
 
     this.setState({ cardList: card });
   }
