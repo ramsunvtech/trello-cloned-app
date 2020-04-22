@@ -1,18 +1,6 @@
 import BaseComponent from '../BaseComponent/BaseComponent.js';
-
-const templateCardCreator = document.createElement('template');
-templateCardCreator.innerHTML = `
-  <div class="card-composer">
-    <form id="new-card-form" class="card-creator">
-      <div class="add-card" style="padding: 6px 8px; margin: 0;">
-        <div>
-          <textarea class="textarea-input" placeholder="Enter a Title for this card" style="height:34px;"></textarea>
-        </div>
-        <button class="add-button primary" type="submit">Add card</button>&nbsp;<a href="#" class="cancel">Cancel</a>
-      </div>
-    </form>
-  </div>
-`;
+import { getUniqueId } from '../../Utiltities.js';
+import * as API from '../../Api.js';
 
 class AddCardForm extends BaseComponent {
   constructor() {
@@ -33,8 +21,34 @@ class AddCardForm extends BaseComponent {
     this.listenToAddLink();
   }
 
+  async addCard(e) {
+    const columnId = this.getAttribute('column-id');
+
+    const {
+      apiEndpoint,
+    } = this.state;
+
+    const newCardItem = {
+      id: getUniqueId(),
+      title: this.$titleInput.value,
+      description: this.$titleInput.value,
+      columnId,
+    };
+
+    const newCardResponse = await API.post(`${apiEndpoint}/cards`, newCardItem);
+
+    if (!newCardResponse.id) {
+      return;
+    }
+
+    this.$app.dispatchEvent(
+      new CustomEvent('onNewCardAdded', {
+        detail: newCardItem,
+      })
+    );
+  }
+
   onUpdate() {
-    // this.appendChild(templateCardCreator.content.cloneNode(true));
     this.$form = this.querySelector('form');
     this.$titleInput = this.querySelector('.textarea-input');
 
@@ -49,18 +63,9 @@ class AddCardForm extends BaseComponent {
     }
 
     if (this.$form) {
-      this.$form.addEventListener('submit', e => {
-        const columnId = this.getAttribute('column-id');
+      this.$form.addEventListener('submit', async (e) => {
         e.preventDefault();
-
-        this.$app.dispatchEvent(
-          new CustomEvent('cardCreation', {
-            detail: {
-              columnId,
-              value: this.$titleInput.value,
-            },
-          })
-        );
+        await this.addCard();
       });
     }    
   }
