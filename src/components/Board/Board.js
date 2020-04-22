@@ -11,40 +11,12 @@ class Board extends BaseComponent {
   }
 
   onMount() {
-    this.$app.addEventListener('columnCreation', this.addColumn.bind(this));
+    this.$app.addEventListener('onNewColumnAdded', e => this.addToBoard(e));
   }
 
-  disconnectedCallback() { }
-
-  async addColumn(e) {
-    const { title } = e.detail;
-    const {
-      apiEndpoint,
-      columnList,
-    } = this.state;
-
-    const newColumnItem = {
-      "id": getUniqueId(),
-      "title": title,
-      "boardId": "1",
-    };
-    
-    const newColumn = await fetch(`${apiEndpoint}/columns`, {
-      method: 'POST',
-      body: JSON.stringify(newColumnItem),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const newColumnResponse = await newColumn.json();
-
-    if (!newColumnResponse.id) {
-      return;
-    }
-
-    const columns = [...columnList, newColumnItem];
-    console.log('columns: ', columns);
-
+  addToBoard(e) {
+    const { columnList = [] } = this.state;
+    const columns = [...columnList, e.detail];
     this.setState({ columnList: columns });
   }
 

@@ -33,8 +33,8 @@ class Card extends BaseComponent {
       apiEndpoint,
     } = this.state;
 
-    const deleteCard = await fetch(`${apiEndpoint}/cards/${id}`, {
-      method: 'DELETE',
+    const deleteCard = await fetch(`${apiEndpoint}/cards/${id}/`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       }
