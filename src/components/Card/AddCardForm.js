@@ -11,7 +11,7 @@ class AddCardForm extends BaseComponent {
 
   listenToAddLink() {
     this.$addButton = this.querySelector('.add-card-btn');
-  
+
     if (this.$addButton) {
       this.$addButton.addEventListener('click', (e) => this.setState({ canToggle: false }));
     }
@@ -53,7 +53,7 @@ class AddCardForm extends BaseComponent {
     this.$titleInput = this.querySelector('.textarea-input');
 
     this.listenToAddLink();
-    
+
     this.$cancelButton = this.querySelector('.cancel-btn');
     if (this.$cancelButton) {
       this.$cancelButton.addEventListener('click', (e) => {
@@ -67,7 +67,7 @@ class AddCardForm extends BaseComponent {
         e.preventDefault();
         await this.addCard();
       });
-    }    
+    }
   }
 
   disconnectedCallback() { }

@@ -58,11 +58,23 @@ class Card extends BaseComponent {
 
     this.$editLink = this.querySelector('a.edit');
     this.$editLink.addEventListener('click', e => this.edit(e));
+
+    this.$card = this.querySelector('div.card');
+    this.$card.addEventListener('dragstart', e => this.ondragstart(e));
+
   }
 
   disconnectedCallback() {
     this.$deleteLink.removeEventListener('click', e => this.delete(e));
     this.$editLink.removeEventListener('click', e => this.edit(e));
+  }
+
+  ondragstart(ev) {
+    const id = this.getAttribute('id');
+    const title = this.getAttribute('name');
+    const columnId = this.getAttribute('column');
+
+    ev.dataTransfer.setData("card", JSON.stringify({ id, title, columnId }));
   }
 
   render() {
@@ -73,9 +85,9 @@ class Card extends BaseComponent {
     } = this.state;
 
     this.innerHTML = `
-      <div class="card" draggable="true" id="card-${id}" ondragstart="">
+      <div class="card" draggable="true" id="card-${id}">
         ${!canEdit ? `<span class="item name" contenteditable="${canEdit}">${name}</span>` : ''}
-        ${canEdit ? `<input id="edit-column-input-${id}" class="edit-card-input" type="text" value="${name}" />`: ''}
+        ${canEdit ? `<input id="edit-column-input-${id}" class="edit-card-input" type="text" value="${name}" />` : ''}
         <span class="item action">
           <a href="#" class="edit">E</a> | 
           <a href="#" class="delete">X</a>
