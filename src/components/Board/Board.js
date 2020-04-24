@@ -25,7 +25,7 @@ class Board extends BaseComponent {
       apiEndpoint,
     } = this.state;
 
-    const columnListApi = await fetch(`${apiEndpoint}/columns`);
+    const columnListApi = await fetch(`${apiEndpoint}/columns?isDeleted=false`);
     const columnList = await columnListApi.json();
 
     this.setState({ columnList });

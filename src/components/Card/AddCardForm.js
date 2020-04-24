@@ -32,6 +32,7 @@ class AddCardForm extends BaseComponent {
       id: getUniqueId(),
       title: this.$titleInput.value,
       description: this.$titleInput.value,
+      isDeleted: false,
       columnId,
     };
 

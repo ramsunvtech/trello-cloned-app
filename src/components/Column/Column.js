@@ -16,8 +16,8 @@ class Column extends BaseComponent {
     this.$app.addEventListener('onBoardSearch', e => this.boardSearch(e));
 
     //todo: need to restrict based on drop column
-    this.$app.addEventListener('dragover', e => this.ondragover(e));
-    this.$app.addEventListener('drop', e => this.ondrop(e));
+    this.$app.addEventListener('dragover', e => this.ondragover(e));    
+    this.$app.addEventListener('drop', e => this.onCardDrop(e));
   }
 
   boardSearch(e) {
@@ -40,7 +40,7 @@ class Column extends BaseComponent {
 
   async getCard() {
     const { apiEndpoint } = this.state;
-    const cardListResponse = await API.get(`${apiEndpoint}/cards`);
+    const cardListResponse = await API.get(`${apiEndpoint}/cards?isDeleted=false`);
     this.setState({ cardList: cardListResponse });
   }
 
@@ -48,14 +48,52 @@ class Column extends BaseComponent {
     ev.preventDefault();
   }
 
-  ondrop(ev) {
-    const columnId = this.getAttribute('id');
-    const card = JSON.parse(ev.dataTransfer.getData("card"));
-    ev.preventDefault();
+  removeFromColumn(droppedCard) {
     const { cardList = [] } = this.state;
-    let updatedList = cardList.filter(data => !(data.columnId == card.columnId && data.title === card.title));
-    const cardData = [...updatedList, { ...card, columnId }];
-    this.setState({ cardList: cardData });
+    let filteredCardList = cardList.filter(card => !(
+      card.id == droppedCard.id &&
+      card.columnId == droppedCard.columnId
+    ));
+    console.log('filteredCardList: ', filteredCardList);
+    this.setState({ cardList: filteredCardList });
+  }
+
+  addToColumn(droppedCard) {
+    const columnId = this.getAttribute('id');
+
+    const { cardList = [] } = this.state;
+    droppedCard.columnId = columnId;
+    const updatedCardList = [ ...cardList, droppedCard ];
+    this.setState({ cardList: updatedCardList });
+  }
+
+  isValidColumn(node) {
+    const columnId = this.getAttribute('id');
+
+    return (
+      node &&
+      node.parentNode &&
+      node.parentNode.tagName.toLowerCase() === 'app-column' &&
+      columnId === node.parentNode.getAttribute('id')
+    );
+  }
+
+  onCardDrop(e) {
+    e.preventDefault();
+    const columnId = this.getAttribute('id');
+    const droppedCard = JSON.parse(e.dataTransfer.getData("card"));
+
+    if (columnId === droppedCard.columnId) {
+      this.removeFromColumn(droppedCard);
+    }
+
+    if (
+      this.isValidColumn(e.target) ||
+      this.isValidColumn(e.target.parentNode) ||
+      this.isValidColumn(e.target.parentNode.parentNode)
+    ) {
+      this.addToColumn(droppedCard);
+    }
   }
 
   getCardList() {

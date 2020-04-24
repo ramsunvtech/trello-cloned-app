@@ -30,6 +30,7 @@ class AddColumnForm extends BaseComponent {
       id: getUniqueId(),
       title: this.$input.value,
       boardId: 1,
+      isDeleted: false
     };
 
     const newColumnResponse = await API.post(`${apiEndpoint}/columns`, newColumnItem);

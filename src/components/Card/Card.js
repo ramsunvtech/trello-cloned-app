@@ -1,4 +1,5 @@
 import BaseComponent from '../BaseComponent/BaseComponent.js';
+import * as API from '../../Api.js';
 
 class Card extends BaseComponent {
   constructor() {
@@ -32,14 +33,14 @@ class Card extends BaseComponent {
     const {
       apiEndpoint,
     } = this.state;
+    //@todo: Delete API removes all the data, issue #885. 
+    //Implementing PATCH with softdelete
+    const softDeleteItem = {
+      isDeleted: true
+    };
 
-    const deleteCard = await fetch(`${apiEndpoint}/cards/${id}/`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const deleteCardResponse = await deleteCard.json();
+    const deleteCardResponse = await API.patch(`${apiEndpoint}/cards/${id}/`, softDeleteItem);
+
   }
 
   edit(e) {
@@ -60,21 +61,21 @@ class Card extends BaseComponent {
     this.$editLink.addEventListener('click', e => this.edit(e));
 
     this.$card = this.querySelector('div.card');
-    this.$card.addEventListener('dragstart', e => this.ondragstart(e));
+    this.$card.addEventListener('dragstart', e => this.moveCard(e));
 
   }
 
   disconnectedCallback() {
-    this.$deleteLink.removeEventListener('click', e => this.delete(e));
-    this.$editLink.removeEventListener('click', e => this.edit(e));
+    this.$deleteLink && this.$deleteLink.removeEventListener('click', e => this.delete(e));
+    this.$editLink && this.$editLink.removeEventListener('click', e => this.edit(e));
   }
 
-  ondragstart(ev) {
+  moveCard(e) {
     const id = this.getAttribute('id');
     const title = this.getAttribute('name');
     const columnId = this.getAttribute('column');
 
-    ev.dataTransfer.setData("card", JSON.stringify({ id, title, columnId }));
+    e.dataTransfer.setData("card", JSON.stringify({ id, title, columnId }));
   }
 
   render() {
