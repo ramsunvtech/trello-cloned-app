@@ -4,6 +4,12 @@
     <img src="https://raw.githubusercontent.com/ramsunvtech/trello-cloned-app/master/trello-app.png">
 </p>
 
+## Demo
+
+Below is the Demo App.
+Rest API: https://my-json-server.typicode.com/ramsunvtech/trello-cloned-app  
+Demo: https://ramsunvtech.github.io/trello-cloned-app/
+
 ## API documentation
 
 ### Board Resources
