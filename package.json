@@ -10,7 +10,8 @@
   "scripts": {
     "start:dev": "webpack-dev-server",
     "json:server": "json-server --watch board.json",
-    "test": "jest --env=jest-environment-jsdom-sixteen --coverage"
+    "test": "jest --env=jest-environment-jsdom-sixteen --coverage",
+    "docs": "rm -rf docs/* && cp -Rf src/* docs/"
   },
   "repository": {
     "type": "git",
@@ -27,9 +28,10 @@
   },
   "homepage": "https://gitlab.com/ramsunvtech/trello-clone#README",
   "devDependencies": {
-    "json-server": "^0.16.1",
     "jest": "^25.3.0",
     "jest-dom": "^4.0.0",
+    "json-server": "^0.16.1",
+    "shelljs": "^0.8.4",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
