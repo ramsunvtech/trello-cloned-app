@@ -1,3 +1,4 @@
+import Loader from './components/Loader/Loader.js';
 import Header from './components/Header/Header.js';
 import Board from './components/Board/Board.js';
 import Column from './components/Column/Column.js';
@@ -9,6 +10,7 @@ import TrelloApp from './TrelloApp.js';
 // Add Custom Elements Once Document is Ready.
 document.addEventListener('readystatechange', event => {
   if (event.target.readyState === 'complete') {
+    customElements.define('app-loader', Loader);
     customElements.define('app-header', Header);
     customElements.define('app-board', Board);
     customElements.define('app-column', Column);

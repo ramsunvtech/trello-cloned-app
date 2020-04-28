@@ -9,9 +9,9 @@ class TrelloApp extends BaseComponent {
     const app = this.getAttribute('app');
 
     this.innerHTML = `
-            <app-header title="Trello Clone App"></app-header>
-            <app-board></app-board>
-        `;
+      <app-header title="Trello Clone App"></app-header>
+      <app-board></app-board>
+    `;
   }
 }
 
